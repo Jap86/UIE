@@ -186,3 +186,12 @@ pyvenv.cfg
 pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,venv
+
+dataset/
+deg_haze/
+deg_haze_depth/
+deg_none/
+deg_random_noise/
+deg_reduce_contr_bright/
+old_resources/
+report_images/
