@@ -11,7 +11,7 @@ def fom(x, square_distance, i_y, a=1/9):
 
 
 
-def edge_detection(dir, modded_rgb, boundary_names, low_t=220, high_t=228):
+def edge_detection(dir, modded_rgb, boundary_names, low_t=219, high_t=229):
 
   modded_boundary = []
 

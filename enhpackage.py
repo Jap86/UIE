@@ -11,8 +11,26 @@ def increase_contr_bright(deg, rgb, filenames, contrast_factor: float = 1.3, bri
     cv.imwrite(join(deg, 'enh_increase_contr_bright', file), enh_image)
   return
 
+def apply_hist_eq(deg, rgb, filenames):
 
-def enhance(enh, deg, depth, filenames):
+  for image, file in zip(rgb, filenames):
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    enh_image = cv.equalizeHist(gray)
+    cv.imwrite(join(deg, 'enh_hist_eq', file), enh_image)
+
+  return
+
+def apply_clahe(deg, rgb, filenames, clip_limit=2.0, gridsize=(8,8)):
+
+  for image, file in zip(rgb, filenames):
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    clahe = cv.createCLAHE(clipLimit=clip_limit, tileGridSize=gridsize)
+    enh_image = clahe.apply(gray)
+    cv.imwrite(join(deg, 'enh_clahe', file), enh_image)
+
+  return
+
+def enhance(enh, deg, filenames):
   
   rgb = []
 
@@ -21,5 +39,12 @@ def enhance(enh, deg, depth, filenames):
 
   if enh == 'enh_increase_contr_bright':
     increase_contr_bright(deg, rgb, filenames)
+
+  if enh == 'enh_hist_eq':
+    apply_hist_eq(deg, rgb, filenames)
+
+  if enh == 'enh_clahe':
+    apply_clahe(deg, rgb, filenames)
+
 
   return
