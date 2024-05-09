@@ -30,6 +30,14 @@ def apply_clahe(deg, rgb, filenames, clip_limit=2.0, gridsize=(8,8)):
 
   return
 
+def apply_white_bal(deg, rgb, filenames):
+  for image, file in zip(rgb, filenames):
+    b, g, r = cv.split(image)
+    
+    cv.imwrite(join(deg, 'enh_white_bal', file), enh_image)
+
+  return
+
 def enhance(enh, deg, filenames):
   
   rgb = []
@@ -45,6 +53,9 @@ def enhance(enh, deg, filenames):
 
   if enh == 'enh_clahe':
     apply_clahe(deg, rgb, filenames)
+
+  if enh == 'enh_white_bal':
+    apply_white_bal(deg, rgb, filenames)
 
 
   return
